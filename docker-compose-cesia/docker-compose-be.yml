@@ -1,0 +1,30 @@
+# docker-compose -f docker-compose-be.yml up -d
+# docker-compose -f docker-compose-be.yml down
+version: '3'
+
+services:
+  backend:
+    image: cesia206/springboot-sqlserver:1.0 # cambiar por tu usuario de dockerhub
+    container_name: springboot-sqlserver
+    ports:
+      - "8085:8085"
+    environment:
+      - PORT=8085
+      - SERVER_URL=http://localhost:8085
+      - DATABASE_URL=jdbc:sqlserver://sql-server:1433;databaseName=aronadb;encrypt=true;trustServerCertificate=true
+      - DATABASE_USERNAME=sa
+      - DATABASE_PASSWORD=Arona@123!
+      - DATABASE_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
+    networks:
+      - my-network
+
+# CONSUMIR UNA RED EXISTENTE CREADA POR OTRO COMPOSE
+networks:
+  my-network:
+    external: true # usa la red creada por el compose de la base de datos
+
+# CREAR UNA RED EN ESTE COMPOSE PARA QUE SEA COMPARTIDA
+#networks:
+#  my-network:
+#    name: my-network   # red compartida, visible desde ambos compose
+#    driver: bridge

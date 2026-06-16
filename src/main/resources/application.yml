@@ -1,0 +1,37 @@
+server:
+  port: ${PORT}
+  url: ${SERVER_URL}
+
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: ${DATABASE_DRIVER}
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  jackson:
+    date-format: dd/MM/yyyy HH:mm:ss
+    time-zone: America/Lima
+    serialization:
+      write-dates-as-timestamps: false
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  info:
+    title: "Sistema Agrícola Arona S.A."
+    description: "API REST — Gestión de Campo y Control de Calidad. Módulos: Mis Datos, Producción, Mis Campos, Alertas Fitosanitarias, Control de Calidad."
+    version: "3.0.0"
+    contact:
+      name: "Sociedad Agrícola Arona S.A."
+      email: "admin@arona.com.pe"
